@@ -7,6 +7,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.106%2B-0078d4.svg)](https://code.visualstudio.com/)
+[![Open VSX](https://img.shields.io/open-vsx/v/c0d3s/control-channel-for-discord?label=Open%20VSX&color=a60ee5)](https://open-vsx.org/extension/c0d3s/control-channel-for-discord)
+[![GitHub Release](https://img.shields.io/github/v/release/codyslater/control-channel-for-discord?label=Release)](https://github.com/codyslater/control-channel-for-discord/releases/latest)
 
 Live channels and threads in the sidebar · send as yourself · @mention your agents · clickable refs that jump to code · docks, pop-outs, and an activity feed · deep links for bots.
 
@@ -18,6 +20,7 @@ Text and announcement channels and their threads are supported (forum channels a
 
 ## Contents
 
+- [Install](#install)
 - [Quick start](#quick-start)
   - [Bot setup](#bot-setup)
   - [Extension setup](#extension-setup)
@@ -38,6 +41,18 @@ Text and announcement channels and their threads are supported (forum channels a
 - [Contributing](#contributing)
 - [License](#license)
 - [Troubleshooting](#troubleshooting)
+
+## Install
+
+**Cursor, Windsurf, VSCodium, code-server, Gitpod, Theia** — search for **Control Channel for Discord** in the Extensions view; these editors install from [Open VSX](https://open-vsx.org/extension/c0d3s/control-channel-for-discord), where it's live.
+
+**VS Code** — the Marketplace listing is pending review. Until it's live, install the `.vsix` manually: download it from the [latest release](https://github.com/codyslater/control-channel-for-discord/releases/latest) (or the Open VSX page), then in the Extensions view open the **⋯** menu → **Install from VSIX…**, or run:
+
+```
+code --install-extension control-channel-for-discord-1.0.0.vsix
+```
+
+Manual installs don't auto-update — watch the [releases page](https://github.com/codyslater/control-channel-for-discord/releases) for new versions.
 
 ## Quick start
 
@@ -60,7 +75,7 @@ Text and announcement channels and their threads are supported (forum channels a
 
 Requires VS Code 1.106 or newer.
 
-1. Install the extension.
+1. [Install the extension](#install).
 2. Run **Discord: Set Bot Token** (Command Palette) and paste your token. It is stored only in VS Code's `SecretStorage` — never in settings, files, or source control. This is the only supported way to provide it.
 3. Set `discordVscode.userId` to your Discord user ID so sends carry your name and avatar. Enable Discord's **Developer Mode** (User Settings → Advanced), then right-click your name → **Copy User ID**.
 4. If the bot is in more than one server, set `discordVscode.guildId` to the target server's ID (right-click the server icon → Copy ID). A single-server bot auto-detects this.
