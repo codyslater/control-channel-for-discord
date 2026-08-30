@@ -12,6 +12,12 @@ describe('parseOpenUri', () => {
   test('lenient about authority (old links keep working)', () => {
     expect(parseOpenUri('vscode://other.pub/open?file=a.py')).toEqual({ file: 'a.py' })
   })
+  test('accepts editor fork schemes', () => {
+    expect(parseOpenUri('cursor://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual({ file: 'a.py' })
+    expect(parseOpenUri('windsurf://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual({ file: 'a.py' })
+    expect(parseOpenUri('vscodium://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual({ file: 'a.py' })
+    expect(parseOpenUri('vscode-insiders://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual({ file: 'a.py' })
+  })
   test('rejects missing file / wrong path / other schemes', () => {
     expect(parseOpenUri('vscode://c0d3s.control-channel-for-discord/open?host=x')).toBeNull()
     expect(parseOpenUri('vscode://c0d3s.control-channel-for-discord/other?file=a')).toBeNull()
@@ -101,6 +107,24 @@ describe('build + roundtrip', () => {
     const uri = buildOpenUri(jump)
     expect(uri).toContain('tunnel=gpubox-tunnel')
     expect(parseOpenUri(uri)).toEqual(jump)
+  })
+  test('buildOpenUri honors the running editor scheme and roundtrips', () => {
+    const uri = buildOpenUri(p, 'cursor')
+    expect(uri.startsWith(`cursor://${AUTHORITY}/open?`)).toBe(true)
+    expect(parseOpenUri(uri)).toEqual(p)
+  })
+  test('buildOpenUri falls back to vscode on a malformed scheme', () => {
+    expect(buildOpenUri(p, 'evil scheme://').startsWith(`vscode://${AUTHORITY}/open?`)).toBe(true)
+  })
+  test('buildRedirectUrl wraps vscode-family schemes, leaves fork schemes bare', () => {
+    expect(buildRedirectUrl(p, 'cursor')).toBe(buildOpenUri(p, 'cursor'))
+    expect(buildRedirectUrl(p, 'vscodium')).toBe(buildOpenUri(p, 'vscodium'))
+    expect(buildRedirectUrl(p, 'vscode-insiders').startsWith('https://vscode.dev/redirect?url=vscode-insiders%3A%2F%2F')).toBe(true)
+    expect(buildRedirectUrl(p, 'vscode')).toBe(buildRedirectUrl(p))
+  })
+  test('unwrapRedirect accepts fork-scheme inner urls', () => {
+    const inner = `cursor://${AUTHORITY}/open?file=a.py`
+    expect(unwrapRedirect(`https://vscode.dev/redirect?url=${encodeURIComponent(inner)}`)).toBe(inner)
   })
   test('cell + range params round-trip', () => {
     const nb = { file: 'analysis.ipynb', cell: 5, line: 3, endLine: 7 }

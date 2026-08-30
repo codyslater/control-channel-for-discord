@@ -157,6 +157,8 @@ vscode://c0d3s.control-channel-for-discord/open?host=<id>&folder=<abs>&file=<rel
 
 These render as links in the chat view. In real Discord clients (which only linkify `http(s)`), wrap the URI as `https://vscode.dev/redirect?url=<url-encoded vscode:// URI>` — the extension unwraps it. The authority `c0d3s.control-channel-for-discord` is fixed; build links against it.
 
+**VS Code forks** (Cursor, Windsurf, VSCodium): swap the scheme for the reader's editor — `cursor://`, `windsurf://`, `vscodium://`, or `vscode-insiders://` with the same authority and parameters. The OS routes each scheme to its own editor, so a `vscode://` link opens official VS Code even when the reader lives in a fork. Fork-scheme links are clickable in this extension's chat view but stay plain text in stock Discord clients (`vscode.dev/redirect` only forwards to official builds), and `tunnel=` links work only in official VS Code.
+
 ### Recognizing your messages
 
 Your sends arrive over the API as webhook messages: `author.bot === true` with a non-null `webhookId`. Bots that guard with `if (message.author.bot) return` will ignore you. Recognize this extension's webhook (named `vscode-bridge`) as yourself:

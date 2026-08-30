@@ -60,7 +60,7 @@ export async function collectContext(cfg: { hostName: string }): Promise<WorkCon
 
 /** The 📍 context message body — shared by the palette command and /loc. */
 export async function locationText(cfg: { hostName: string }): Promise<string> {
-  return formatContext(await collectContext(cfg))
+  return formatContext(await collectContext(cfg), vscode.env.uriScheme)
 }
 
 export function registerShareCommand(deps: {

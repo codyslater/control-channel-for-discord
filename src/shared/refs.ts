@@ -1,4 +1,4 @@
-import { OpenParams, parseOpenUri, unwrapRedirect } from './uri'
+import { EDITOR_SCHEMES, isEditorUri, OpenParams, parseOpenUri, unwrapRedirect } from './uri'
 
 export type Ref =
   | { kind: 'file'; path: string; line?: number; col?: number; endLine?: number; endCol?: number; cell?: number }
@@ -14,7 +14,7 @@ export interface RefSpan {
 const SOURCE_EXTS =
   'py|ipynb|ts|tsx|js|jsx|mjs|cjs|rs|go|java|kt|c|h|cc|cpp|hpp|cs|rb|php|md|json|yaml|yml|toml|cfg|ini|sh|bash|zsh|sql|css|scss|html|vue|svelte|txt|log'
 
-const URL_RE = /(?:https?|vscode):\/\/[^\s<>"')]+/g
+const URL_RE = new RegExp(String.raw`(?:https?|${EDITOR_SCHEMES.join('|')}):\/\/[^\s<>"')]+`, 'g')
 const PY_TB_RE = /File "([^"]+)", line (\d+)/g
 // The optional function-name segment is space-separated tokens (each a non-space
 // run), NOT a class that itself includes space — otherwise `[... ]+\s+` backtracks
@@ -46,7 +46,7 @@ export function extractRefs(text: string): RefSpan[] {
   const urlZones: { start: number; end: number }[] = []
   for (const m of text.matchAll(URL_RE)) {
     const raw = m[0]
-    const inner = raw.startsWith('vscode://') ? raw : (unwrapRedirect(raw) ?? '')
+    const inner = isEditorUri(raw) ? raw : (unwrapRedirect(raw) ?? '')
     const params = inner ? parseOpenUri(inner) : null
     if (params) {
       cands.push({ start: m.index, end: m.index + raw.length, ref: { kind: 'deeplink', params }, prio: 0 })

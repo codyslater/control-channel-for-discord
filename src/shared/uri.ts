@@ -1,5 +1,18 @@
 export const AUTHORITY = 'c0d3s.control-channel-for-discord'
 
+/** URI schemes of editors known to run this extension — official VS Code plus the
+ * forks served by Open VSX. Parsing and in-chat link detection are bound to this
+ * list so ordinary URLs never become deep-link candidates; building honors any
+ * well-formed scheme the running editor reports (`vscode.env.uriScheme`), because
+ * the editor is authoritative for its own scheme even when it isn't listed here. */
+export const EDITOR_SCHEMES = ['vscode', 'vscode-insiders', 'vscodium', 'cursor', 'windsurf'] as const
+
+const SCHEME_RE = /^[a-z][a-z0-9+.-]*$/
+
+export function isEditorUri(s: string): boolean {
+  return EDITOR_SCHEMES.some((scheme) => s.startsWith(`${scheme}://`))
+}
+
 export interface OpenParams {
   host?: string
   folder?: string
@@ -29,8 +42,8 @@ export function parseOpenUri(uri: string): OpenParams | null {
   } catch {
     return null
   }
-  // vscode://authority/open — URL() puts 'authority' in host for vscode: scheme
-  if (u.protocol !== 'vscode:' || u.pathname !== '/open') return null
+  // <scheme>://authority/open — URL() puts 'authority' in host for these schemes
+  if (!(EDITOR_SCHEMES as readonly string[]).includes(u.protocol.replace(/:$/, '')) || u.pathname !== '/open') return null
   const q = u.searchParams
   const file = q.get('file')
   const folder = q.get('folder')
@@ -67,7 +80,7 @@ export function parseOpenUri(uri: string): OpenParams | null {
   return p
 }
 
-export function buildOpenUri(p: OpenParams): string {
+export function buildOpenUri(p: OpenParams, scheme = 'vscode'): string {
   const q = new URLSearchParams()
   if (p.host) q.set('host', p.host)
   if (p.folder) q.set('folder', p.folder)
@@ -79,11 +92,17 @@ export function buildOpenUri(p: OpenParams): string {
   if (p.cell !== undefined) q.set('cell', String(p.cell))
   if (p.endLine !== undefined) q.set('endLine', String(p.endLine))
   if (p.endCol !== undefined) q.set('endCol', String(p.endCol))
-  return `vscode://${AUTHORITY}/open?${q.toString()}`
+  const s = SCHEME_RE.test(scheme) ? scheme : 'vscode'
+  return `${s}://${AUTHORITY}/open?${q.toString()}`
 }
 
-export function buildRedirectUrl(p: OpenParams): string {
-  return `https://vscode.dev/redirect?url=${encodeURIComponent(buildOpenUri(p))}`
+export function buildRedirectUrl(p: OpenParams, scheme = 'vscode'): string {
+  const s = SCHEME_RE.test(scheme) ? scheme : 'vscode'
+  const uri = buildOpenUri(p, s)
+  // vscode.dev/redirect only forwards to official VS Code builds; fork schemes go
+  // bare — clickable in this extension's chat, plain text in stock Discord clients.
+  if (s !== 'vscode' && s !== 'vscode-insiders') return uri
+  return `https://vscode.dev/redirect?url=${encodeURIComponent(uri)}`
 }
 
 export function unwrapRedirect(url: string): string | null {
@@ -95,7 +114,7 @@ export function unwrapRedirect(url: string): string | null {
   }
   if (u.protocol !== 'https:' || u.hostname !== 'vscode.dev' || u.pathname !== '/redirect') return null
   const inner = u.searchParams.get('url')
-  return inner && inner.startsWith('vscode://') ? inner : null
+  return inner && isEditorUri(inner) ? inner : null
 }
 
 const IPV4_RE = /^\d{1,3}(?:\.\d{1,3}){3}$/

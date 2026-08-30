@@ -55,11 +55,18 @@ vscode://c0d3s.control-channel-for-discord/open?host=<id>&folder=<abs>&file=<rel
 - `line`/`col` (+ `endLine`/`endCol` for a range), `cell` for `.ipynb` (cell-relative
   lines), `chat` to also open a channel/thread, `tunnel` for VS Code Remote Tunnels.
 - The authority `c0d3s.control-channel-for-discord` is fixed — build links against it.
+- The `vscode://` scheme targets official VS Code. If the human uses a fork, swap it
+  for their editor's scheme — `cursor://`, `windsurf://`, `vscodium://`, or
+  `vscode-insiders://` — with the same authority and parameters; the OS routes each
+  scheme to its own editor. Ask which editor they use if you don't know.
 
 In real Discord clients, wrap the URI so it is clickable:
 `https://vscode.dev/redirect?url=<url-encoded vscode:// URI>`. The extension unwraps
-it. **Tunnel links prompt the human for confirmation by default** — do not assume a
-tunnel link connects silently unless they have set `discordVscode.trustTunnelLinks`.
+it. This works only for `vscode://` and `vscode-insiders://` — fork-scheme links stay
+plain text in Discord clients (still clickable inside the extension's chat view), and
+`tunnel=` links work only in official VS Code. **Tunnel links prompt the human for
+confirmation by default** — do not assume a tunnel link connects silently unless they
+have set `discordVscode.trustTunnelLinks`.
 
 ## Recognizing the human's messages (important)
 

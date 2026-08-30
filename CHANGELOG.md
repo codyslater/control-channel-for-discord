@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Deep links work in VS Code forks: links may use the reader's editor scheme (`cursor://`, `windsurf://`, `vscodium://`, `vscode-insiders://`) and `/loc`'s `[open]` link now uses the running editor's own scheme, so it round-trips to that editor instead of always opening official VS Code
+- README: Install section and registry badges
+
 ## 1.0.0 — 2026-08-30
 
 Initial release.

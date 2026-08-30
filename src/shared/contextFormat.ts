@@ -12,7 +12,7 @@ export interface WorkContext {
   branch?: string
 }
 
-export function formatContext(c: WorkContext): string {
+export function formatContext(c: WorkContext, scheme?: string): string {
   const parts: string[] = []
   parts.push(c.remoteKind === 'local' ? c.host : `${c.host} (${c.remoteKind})`)
   if (c.repo) parts.push(c.isWorktree ? `${c.repo} (worktree)` : c.repo)
@@ -27,7 +27,7 @@ export function formatContext(c: WorkContext): string {
   if (c.branch) parts.push(c.branch)
   let out = `📍 ${parts.join(' · ')}`
   if (c.file && c.folderPath) {
-    out += `\n[open](${buildRedirectUrl({ host: c.host, folder: c.folderPath, file: c.file, line: c.line })})`
+    out += `\n[open](${buildRedirectUrl({ host: c.host, folder: c.folderPath, file: c.file, line: c.line }, scheme)})`
   }
   return out
 }

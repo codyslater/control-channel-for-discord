@@ -62,6 +62,17 @@ describe('deep links and urls', () => {
   test('paths inside ordinary urls are ignored', () => {
     expect(refs('docs at https://example.com/a/b.py?x=1')).toEqual([])
   })
+  test('raw fork-scheme open links (cursor, windsurf, vscodium)', () => {
+    expect(refs('jump: cursor://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual([
+      { kind: 'deeplink', params: { file: 'a.py' } },
+    ])
+    expect(refs('jump: windsurf://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual([
+      { kind: 'deeplink', params: { file: 'a.py' } },
+    ])
+    expect(refs('jump: vscodium://c0d3s.control-channel-for-discord/open?file=a.py')).toEqual([
+      { kind: 'deeplink', params: { file: 'a.py' } },
+    ])
+  })
 })
 
 describe('overlaps', () => {

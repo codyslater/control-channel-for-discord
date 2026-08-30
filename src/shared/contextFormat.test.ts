@@ -16,6 +16,15 @@ describe('formatContext', () => {
     expect(inner).toContain('host=gpubox')
     expect(inner).toContain('file=src/train.py')
   })
+  test('fork scheme emits a bare editor link instead of a vscode.dev redirect', () => {
+    const out = formatContext(
+      { host: 'gpubox', remoteKind: 'ssh', folderPath: '/home/dev/repo', file: 'src/train.py', line: 142 },
+      'cursor',
+    )
+    const [, line2] = out.split('\n')
+    expect(line2).toMatch(/^\[open\]\(cursor:\/\/c0d3s\.control-channel-for-discord\/open\?/)
+    expect(line2).not.toContain('vscode.dev')
+  })
   test('local minimal: no file, no git', () => {
     expect(formatContext({ host: 'thinkpad', remoteKind: 'local' })).toBe('📍 thinkpad')
   })
