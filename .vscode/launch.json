@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "preLaunchTask": null
+    },
+    {
+      "name": "Run Extension (fresh profile)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--user-data-dir=${userHome}/.cache/discord-vscode-dev-profile"
+      ],
+      "preLaunchTask": null
+    },
+    {
+      "name": "Run Extension (demo)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--user-data-dir=${userHome}/.cache/discord-vscode-demo-profile",
+        "--disable-extensions"
+      ],
+      "env": {
+        "DISCORD_VSCODE_DEMO": "1"
+      },
+      "preLaunchTask": null
+    }
+  ]
+}
