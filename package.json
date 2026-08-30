@@ -1,7 +1,7 @@
 {
   "name": "control-channel-for-discord",
   "displayName": "Control Channel for Discord",
-  "description": "Your Discord AI control channel inside VS Code",
+  "description": "Chat in your Discord server from inside VS Code — live channels, threads, an activity feed, and clickable code references",
   "publisher": "c0d3s",
   "version": "1.0.0",
   "license": "MIT",
@@ -17,9 +17,9 @@
   "keywords": [
     "discord",
     "chat",
-    "remote",
     "agents",
-    "control-plane"
+    "productivity",
+    "collaboration"
   ],
   "engines": {
     "vscode": "^1.106.0"
