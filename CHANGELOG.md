@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.0.1 — 2026-08-31
 
 - Deep links work in VS Code forks: links may use the reader's editor scheme (`cursor://`, `windsurf://`, `vscodium://`, `vscode-insiders://`) and `/loc`'s `[open]` link now uses the running editor's own scheme, so it round-trips to that editor instead of always opening official VS Code
-- README: Install section and registry badges
+- New icon
+- Added [PRIVACY.md](PRIVACY.md) — no telemetry, no third-party servers; the extension talks only to Discord
 
 ## 1.0.0 — 2026-08-30
 

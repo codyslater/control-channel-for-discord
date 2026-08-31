@@ -3,9 +3,13 @@
   "displayName": "Control Channel for Discord",
   "description": "Chat in your Discord server from inside VS Code — live channels, threads, an activity feed, and clickable code references",
   "publisher": "c0d3s",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0b7c71",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/codyslater/control-channel-for-discord"
@@ -17,7 +21,7 @@
   "keywords": [
     "discord",
     "chat",
-    "agents",
+    "bots",
     "productivity",
     "collaboration"
   ],
@@ -348,7 +352,7 @@
       ]
     },
     "configuration": {
-      "title": "Discord Control Channel",
+      "title": "Control Channel for Discord",
       "properties": {
         "discordVscode.guildId": {
           "type": "string",

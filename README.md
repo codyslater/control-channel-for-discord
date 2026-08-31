@@ -3,18 +3,17 @@
   <td valign="middle"><h1>Control Channel for Discord</h1></td>
 </tr></table>
 
-**Your Discord AI control channel, inside VS Code.**
+**Your Discord server, inside VS Code.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.106%2B-0078d4.svg)](https://code.visualstudio.com/)
-[![Open VSX](https://img.shields.io/open-vsx/v/c0d3s/control-channel-for-discord?label=Open%20VSX&color=a60ee5)](https://open-vsx.org/extension/c0d3s/control-channel-for-discord)
 [![GitHub Release](https://img.shields.io/github/v/release/codyslater/control-channel-for-discord?label=Release)](https://github.com/codyslater/control-channel-for-discord/releases/latest)
 
-Live channels and threads in the sidebar · send as yourself · @mention your agents · clickable refs that jump to code · docks, pop-outs, and an activity feed · deep links for bots.
+Live channels and threads in the sidebar · send as yourself · @mention people and bots · clickable refs that jump to code · docks, pop-outs, and an activity feed · deep links that open the right file on the right machine.
 
 ![Live demo: activity feed, mentions, docks, pop-outs, and ref jumps](docs/media/demo.gif)
 
-A private Discord server becomes an AI control plane in your sidebar: read channels and threads live, send as yourself (via webhook, with your name and avatar), and click file or traceback references to jump to the right line — local or remote. Bring your own bot token; nothing is shared between installs.
+Keep up with a private Discord server without leaving your editor: read channels and threads live, send as yourself (via webhook, with your name and avatar), and click file or traceback references to jump to the right line — local or remote. Bring your own bot token; the extension talks only to Discord, and nothing is shared between installs.
 
 Text and announcement channels and their threads are supported (forum channels are not yet). Voice channels show a live occupant count and open in the Discord app.
 
@@ -33,6 +32,7 @@ Text and announcement channels and their threads are supported (forum channels a
   - [Pins and silence](#pins-and-silence)
   - [Mentions](#mentions)
   - [Slash commands](#slash-commands)
+- [Privacy & security](#privacy--security)
 - [For bot authors](#for-bot-authors)
   - [Deep links](#deep-links)
   - [Recognizing your messages](#recognizing-your-messages)
@@ -44,12 +44,12 @@ Text and announcement channels and their threads are supported (forum channels a
 
 ## Install
 
-**Cursor, Windsurf, VSCodium, code-server, Gitpod, Theia** — search for **Control Channel for Discord** in the Extensions view; these editors install from [Open VSX](https://open-vsx.org/extension/c0d3s/control-channel-for-discord), where it's live.
+Search for **Control Channel for Discord** in your editor's Extensions view and install from there.
 
-**VS Code** — the Marketplace listing is pending review. Until it's live, install the `.vsix` manually: download it from the [latest release](https://github.com/codyslater/control-channel-for-discord/releases/latest) (or the Open VSX page), then in the Extensions view open the **⋯** menu → **Install from VSIX…**, or run:
+To install manually instead, download the `.vsix` from the [latest release](https://github.com/codyslater/control-channel-for-discord/releases/latest), then in the Extensions view open the **⋯** menu → **Install from VSIX…**, or run:
 
 ```
-code --install-extension control-channel-for-discord-1.0.0.vsix
+code --install-extension control-channel-for-discord-1.0.1.vsix
 ```
 
 Manual installs don't auto-update — watch the [releases page](https://github.com/codyslater/control-channel-for-discord/releases) for new versions.
@@ -137,6 +137,10 @@ Type `/` at the start of the box (arrows + Tab/Enter to complete, Esc to dismiss
 - Double the slash to send a literal one: `//loc` sends `/loc`.
 
 Sends are Discord *silent* messages (`@silent`): delivered and visible to bots, but no push notification — except a message that @mentions a person, which pings them.
+
+## Privacy & security
+
+No telemetry, no analytics, no accounts, and no servers of ours. The extension connects only to Discord's services (API, gateway, and CDN) using the bot token you provide, and the author receives no data from your use of it. Your token lives only in VS Code's `SecretStorage`; the only content that leaves your machine is what you choose to send — messages you type, and what `/loc`, `/snippet`, or `/diff` include when you invoke them. Full details in [PRIVACY.md](PRIVACY.md).
 
 ## For bot authors
 
