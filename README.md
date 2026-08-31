@@ -5,6 +5,8 @@
 
 **Your Discord server, inside VS Code.**
 
+*An unofficial community extension — not affiliated with or endorsed by Discord Inc.*
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.106%2B-0078d4.svg)](https://code.visualstudio.com/)
 [![GitHub Release](https://img.shields.io/github/v/release/codyslater/control-channel-for-discord?label=Release)](https://github.com/codyslater/control-channel-for-discord/releases/latest)
@@ -49,7 +51,7 @@ Search for **Control Channel for Discord** in your editor's Extensions view and 
 To install manually instead, download the `.vsix` from the [latest release](https://github.com/codyslater/control-channel-for-discord/releases/latest), then in the Extensions view open the **⋯** menu → **Install from VSIX…**, or run:
 
 ```
-code --install-extension control-channel-for-discord-1.0.2.vsix
+code --install-extension control-channel-for-discord-1.0.3.vsix
 ```
 
 Manual installs don't auto-update — watch the [releases page](https://github.com/codyslater/control-channel-for-discord/releases) for new versions.

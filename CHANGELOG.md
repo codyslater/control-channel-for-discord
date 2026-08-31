@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 — 2026-08-31
+
+- Display name and description now mark the extension as unofficial and not affiliated with Discord Inc.
+
 ## 1.0.2 — 2026-08-31
 
 - Leaner install: Discord REST calls now use the editor runtime's built-in `fetch`, dropping the bundled HTTP client (~0.6 MB smaller)

@@ -1,9 +1,9 @@
 {
   "name": "control-channel-for-discord",
-  "displayName": "Control Channel for Discord",
-  "description": "Chat in your Discord server from inside VS Code — live channels, threads, an activity feed, and clickable code references",
+  "displayName": "Control Channel for Discord (Unofficial)",
+  "description": "Unofficial extension to chat in your Discord server from inside VS Code — live channels, threads, an activity feed, and clickable code references. Not affiliated with or endorsed by Discord Inc.",
   "publisher": "c0d3s",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "icon": "media/icon.png",
   "galleryBanner": {
