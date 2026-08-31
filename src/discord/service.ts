@@ -34,6 +34,12 @@ export class DiscordService {
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildVoiceStates,
       ],
+      // REST over the runtime's built-in fetch; undici is aliased to a stub
+      // at build time (esbuild.mjs), so this must stay in place.
+      rest: {
+        makeRequest: (url, init) =>
+          globalThis.fetch(url, init as globalThis.RequestInit) as never,
+      },
     })
     this.client = client
 

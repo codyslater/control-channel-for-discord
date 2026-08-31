@@ -49,7 +49,7 @@ Search for **Control Channel for Discord** in your editor's Extensions view and 
 To install manually instead, download the `.vsix` from the [latest release](https://github.com/codyslater/control-channel-for-discord/releases/latest), then in the Extensions view open the **⋯** menu → **Install from VSIX…**, or run:
 
 ```
-code --install-extension control-channel-for-discord-1.0.1.vsix
+code --install-extension control-channel-for-discord-1.0.2.vsix
 ```
 
 Manual installs don't auto-update — watch the [releases page](https://github.com/codyslater/control-channel-for-discord/releases) for new versions.

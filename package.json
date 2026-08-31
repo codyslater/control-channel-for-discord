@@ -3,7 +3,7 @@
   "displayName": "Control Channel for Discord",
   "description": "Chat in your Discord server from inside VS Code — live channels, threads, an activity feed, and clickable code references",
   "publisher": "c0d3s",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "icon": "media/icon.png",
   "galleryBanner": {

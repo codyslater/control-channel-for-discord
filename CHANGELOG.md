@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 — 2026-08-31
+
+- Leaner install: Discord REST calls now use the editor runtime's built-in `fetch`, dropping the bundled HTTP client (~0.6 MB smaller)
+
 ## 1.0.1 — 2026-08-31
 
 - Deep links work in VS Code forks: links may use the reader's editor scheme (`cursor://`, `windsurf://`, `vscodium://`, `vscode-insiders://`) and `/loc`'s `[open]` link now uses the running editor's own scheme, so it round-trips to that editor instead of always opening official VS Code

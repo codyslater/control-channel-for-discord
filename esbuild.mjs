@@ -11,6 +11,7 @@ const configs = [
     target: 'node20',
     sourcemap: true,
     external: ['vscode', 'zlib-sync', 'bufferutil', 'utf-8-validate'],
+    alias: { undici: './src/discord/undici-stub.ts' },
   },
   {
     // Demo backend (DISCORD_VSCODE_DEMO=1) — separate bundle, excluded from the VSIX.
