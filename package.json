@@ -29,8 +29,7 @@
     "vscode": "^1.106.0"
   },
   "categories": [
-    "Other",
-    "Chat"
+    "Other"
   ],
   "main": "./dist/extension.js",
   "extensionKind": [
@@ -362,7 +361,7 @@
         "discordVscode.userId": {
           "type": "string",
           "default": "",
-          "description": "Your Discord user ID — used to send webhook messages with your name and avatar."
+          "description": "Your Discord user ID — messages you send then carry your name and avatar."
         },
         "discordVscode.hostName": {
           "type": "string",
@@ -439,7 +438,7 @@
         "discordVscode.trustTunnelLinks": {
           "type": "boolean",
           "default": false,
-          "description": "Connect to a tunnel named in a deep link without asking first. Leave off unless you trust everyone who can post links in your server (e.g. a private server with only your own bots) — a malicious link could otherwise open a folder on a tunnel you own."
+          "description": "Connect to a tunnel named in a deep link without asking first. Leave off unless you trust everyone who can post links in your server (e.g. a private server with only your own bots) — an untrusted link could otherwise open a folder on a tunnel you own."
         }
       }
     }
